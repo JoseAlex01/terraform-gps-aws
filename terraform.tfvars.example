@@ -1,0 +1,42 @@
+aws_region   = "us-east-1"
+project_name = "gps-tracking"
+environment  = "prod"
+
+# Cambiar por tu IP pública real con /32, ejemplo: "181.198.10.20/32"
+# Si el proveedor también necesita SSH desde su oficina, se puede agregar temporalmente otra regla en Security Group.
+allowed_ssh_cidr = "TU_IP_PUBLICA/32"
+
+# Debe existir previamente en EC2 > Key Pairs. Este key pair es para el administrador principal.
+ec2_key_name = "mi-keypair-aws"
+
+# Inicio recomendado para 60-150 dispositivos.
+ec2_instance_type  = "t3.medium"      # 2 vCPU / 4 GB RAM
+rds_instance_class = "db.t3.medium"   # 2 vCPU / 4 GB RAM aprox.
+
+root_volume_size          = 80
+rds_allocated_storage     = 100
+rds_max_allocated_storage = 500
+
+# RDS solicitado por proveedor: Amazon RDS for MariaDB 10.11.x LTS.
+# Verificar con AWS CLI si está disponible en tu región:
+# aws rds describe-db-engine-versions --engine mariadb --engine-version 10.11 --query 'DBEngineVersions[].EngineVersion'
+rds_engine_version = "10.11.18"
+
+# Cambiar antes de aplicar. No subir terraform.tfvars a GitHub.
+db_name     = "gpsdb"
+db_username = "gpsadmin"
+db_password = "CAMBIAR_PASSWORD_SEGURO"
+
+# Usuario Linux para proveedor en la EC2.
+provider_linux_user = "proveedor"
+provider_ssh_public_key = "ssh-ed25519 AAAA... clave-publica-del-proveedor"
+provider_sudo_enabled = true
+
+# Correo opcional para alarmas. Debes confirmar la suscripción que llega por email.
+cloudwatch_alarm_email = "tu-correo@dominio.com"
+
+# Umbrales de alarmas.
+ec2_cpu_alarm_threshold       = 75
+ec2_memory_alarm_threshold    = 80
+rds_cpu_alarm_threshold       = 75
+rds_freeable_memory_alarm_bytes = 536870912 # 512 MB
