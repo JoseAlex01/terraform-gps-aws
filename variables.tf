@@ -36,8 +36,8 @@ variable "private_subnet_cidrs" {
 
 variable "allowed_ssh_cidr" {
   description = "IP pública autorizada para SSH. Cambiar por tu IP /32"
-  type        = string
-  default     = "0.0.0.0/0"
+  type        = list(string)
+  default     = []
 }
 
 variable "allowed_app_ports" {
