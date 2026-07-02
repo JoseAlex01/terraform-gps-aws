@@ -11,7 +11,6 @@ Esta plantilla despliega:
 - Amazon RDS for MariaDB 10.11.x privado.
 - Security Group de aplicación.
 - Security Group de RDS permitiendo MariaDB solo desde EC2.
-- S3 privado para backups/históricos.
 - Backups automáticos de RDS.
 - Protección contra borrado accidental en RDS.
 - CloudWatch Dashboard con CPU/memoria EC2 y CPU/memoria RDS.

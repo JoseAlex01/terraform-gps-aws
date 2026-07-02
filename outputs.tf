@@ -28,11 +28,6 @@ output "rds_engine" {
   value       = "${aws_db_instance.mariadb.engine} ${aws_db_instance.mariadb.engine_version_actual}"
 }
 
-output "s3_backups_bucket" {
-  description = "Bucket S3 para backups/históricos"
-  value       = aws_s3_bucket.backups.bucket
-}
-
 output "cloudwatch_dashboard_name" {
   description = "Dashboard CloudWatch creado"
   value       = aws_cloudwatch_dashboard.main.dashboard_name
