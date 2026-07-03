@@ -34,7 +34,7 @@ variable "private_subnet_cidrs" {
   default     = ["10.20.11.0/24", "10.20.12.0/24"]
 }
 
-variable "allowed_ssh_cidr" {
+variable "allowed_ssh_cidrs" {
   description = "IP pública autorizada para SSH. Cambiar por tu IP /32"
   type        = list(string)
   default     = []

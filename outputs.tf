@@ -11,6 +11,7 @@ output "ec2_private_ip" {
 output "provider_linux_user" {
   description = "Usuario Linux creado para el proveedor"
   value       = var.provider_ssh_public_key != "" ? var.provider_linux_user : "no-creado"
+  sensitive   = true
 }
 
 output "rds_endpoint" {
