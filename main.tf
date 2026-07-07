@@ -112,6 +112,22 @@ resource "aws_security_group" "app" {
     cidr_blocks = var.allowed_ssh_cidrs
   }
 
+  ingress {
+    description = "Dispositivos GPS Teltonika- protocolo puerto 6027"
+    from_port   = 6027
+    to_port     = 6027
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Dispositivos GPS Concox - protocolo puerto 6023"
+    from_port   = 6023
+    to_port     = 6023
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   dynamic "ingress" {
     for_each = var.allowed_app_ports
     content {
@@ -175,6 +191,11 @@ resource "aws_db_parameter_group" "mariadb" {
   name        = "${local.name_prefix}-mariadb-10-11"
   family      = "mariadb10.11"
   description = "Parameter group MariaDB 10.11 para plataforma GPS"
+
+  parameter {
+    name  = "log_bin_trust_function_creators"
+    value = "1"
+  }
 
   parameter {
     name  = "character_set_server"
